@@ -12,49 +12,49 @@
 // the screen should remain fully clear as long as no key is pressed.
 
    @status
-    M=-1        // status=0xFFFF
-    D=0         // Argument - what to set screen bits to
+    M=-1        
+    D=0         
     @SETSCREEN
     0;JMP
 
 (LOOP)
     @KBD
-    D=M         // D = current keyboard character
+    D=M         
     @SETSCREEN
-    D;JEQ       // If no key, set screen to zeroes (white)
-    D=-1        // If key pressed, set screen to all 1 bits (black)
+    D;JEQ       
+    D=-1        
     
-(SETSCREEN)     // Set D=new status before jumping here
+(SETSCREEN)     
     @ARG
-    M=D         // Save new status arg
-    @status     // FFFF=black, 0=white - status of entire screen
-    D=D-M       // D=newstatus-status
+    M=D         
+    @status     
+    D=D-M       
     @LOOP
-    D;JEQ        // Do nothing if new status == old status
+    D;JEQ        
     
     @ARG
     D=M
     @status
-    M=D         // status = ARG
+    M=D         
     
     @SCREEN
-    D=A         // D=Screen address
+    D=A         
     @8192
-    D=D+A       // D=Byte just past last screen address
+    D=D+A       
     @i
-    M=D         // i=SCREEN address
+    M=D        
     
 (SETLOOP)    
     @i
     D=M-1
-    M=D         // i=i-1
+    M=D         
     @LOOP
-    D;JLT       // if i<0 goto LOOP
+    D;JLT       
     
     @status
-    D=M         // D=status
+    D=M         
     @i
-    A=M         // Indirect
-    M=D         // M[current screen address]=status
+    A=M         
+    M=D         
     @SETLOOP
     0;JMP

@@ -7,25 +7,25 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
   @2
-    M=0     // R2 = 0
+    M=0     
     @i
-    M=0     // i=0
+    M=0     
 (LOOP)
     @i
-    D=M     // D=i
+    D=M     
     @0
-    D=D-M   // D=i-R0
+    D=D-M   
     @END
-    D;JGE    // if i-R0 >= 0 goto END
+    D;JGE    
 
     @1
-    D=M     // D=R1
+    D=M     
     @2
-    M=D+M   // R2=R2+R1
+    M=D+M   
     @i
-    M=M+1   // i=i+1
+    M=M+1   
     @LOOP
-    0;JMP   // Repeat
+    0;JMP   
 (END)
     @END
     0;JMP
