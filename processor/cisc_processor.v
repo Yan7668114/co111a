@@ -7,9 +7,10 @@ module cisc_processor (
   output [7:0] result
 );
 
-reg [7:0] regfile[15:0];
 
-wire [7:0] alu_result;
+reg [7:0] regfile[15:0];
+reg [7:0] alu_result;
+reg [7:0] result;
 
 always @(posedge clk) begin
   case (opcode)
@@ -25,6 +26,6 @@ always @(posedge clk) begin
   regfile[operand3] <= alu_result;
   
   result <= alu_result;
+  
 end
-
 endmodule
